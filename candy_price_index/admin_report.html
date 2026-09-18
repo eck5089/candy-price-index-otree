@@ -58,8 +58,8 @@
 
 <h4>Individual payout list</h4>
 <table class="table table-sm table-striped">
-    <tr><th>Participant</th><th>Alternative?</th><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
+    <tr><th>#</th><th>Participant code</th><th>Alternative?</th><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
     {{ for row in payout_rows }}
-    <tr><td>{{ row.participant }}</td><td>{{ row.alternative }}</td><td>{{ row.kiss }}</td><td>{{ row.reeses }}</td><td>{{ row.lifesaver }}</td><td>{{ row.snickers }}</td></tr>
+    <tr><td><strong>{{ row.participant_number }}</strong></td><td>{{ row.participant }}</td><td>{{ row.alternative }}</td><td>{{ row.kiss }}</td><td>{{ row.reeses }}</td><td>{{ row.lifesaver }}</td><td>{{ row.snickers }}</td></tr>
     {{ endfor }}
 </table>
