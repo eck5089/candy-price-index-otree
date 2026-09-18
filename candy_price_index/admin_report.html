@@ -3,7 +3,7 @@
 
 <h4>Average quantities by period</h4>
 <table class="table table-sm table-bordered">
-    <tr><th>Period</th><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
+    <tr><th>Period</th><th>Smarties</th><th>Tootsie Rolls</th><th>Life Savers</th><th>Starburst</th></tr>
     {{ for row in purchase_rows }}
     <tr>
         <td>{{ row.period }}</td><td>{{ row.kiss|to2 }}</td><td>{{ row.reeses|to2 }}</td><td>{{ row.lifesaver|to2 }}</td>
@@ -14,7 +14,7 @@
 
 <h4>Base-period bundle distribution</h4>
 <table class="table table-sm table-bordered">
-    <tr><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Students</th></tr>
+    <tr><th>Smarties</th><th>Tootsie Rolls</th><th>Life Savers</th><th>Students</th></tr>
     {{ for row in bundle_rows }}
     <tr><td>{{ row.kiss }}</td><td>{{ row.reeses }}</td><td>{{ row.lifesaver }}</td><td>{{ row.count }}</td></tr>
     {{ endfor }}
@@ -52,7 +52,7 @@
 
 <h4>Candy actually needed for the selected payout</h4>
 <table class="table table-sm table-bordered">
-    <tr><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
+    <tr><th>Smarties</th><th>Tootsie Rolls</th><th>Life Savers</th><th>Starburst</th></tr>
     <tr><td>{{ payout_totals.kiss }}</td><td>{{ payout_totals.reeses }}</td><td>{{ payout_totals.lifesaver }}</td><td>{{ payout_totals.snickers }}</td></tr>
 </table>
 
@@ -60,7 +60,7 @@
 
 <h4>Individual payout list</h4>
 <table class="table table-sm table-striped">
-    <tr><th>#</th><th>Participant code</th><th>Alternative?</th><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
+    <tr><th>#</th><th>Participant code</th><th>Alternative?</th><th>Smarties</th><th>Tootsie Rolls</th><th>Life Savers</th><th>Starburst</th></tr>
     {{ for row in payout_rows }}
     <tr><td><strong>{{ row.participant_number }}</strong></td><td>{{ row.participant }}</td><td>{{ row.alternative }}</td><td>{{ row.kiss }}</td><td>{{ row.reeses }}</td><td>{{ row.lifesaver }}</td><td>{{ row.snickers }}</td></tr>
     {{ endfor }}
