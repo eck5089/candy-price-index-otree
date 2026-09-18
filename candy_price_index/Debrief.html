@@ -27,7 +27,7 @@
 
 <h4>🛒 How class purchases changed</h4>
 <table class="table table-sm table-bordered align-middle">
-    <tr><th>Period</th><th>Avg. Kisses</th><th>Avg. Reese's</th><th>Avg. Lifesavers</th><th>Avg. Snickers</th></tr>
+    <tr><th>Period</th><th>Avg. Smarties</th><th>Avg. Tootsie Rolls</th><th>Avg. Life Savers</th><th>Avg. Starburst</th></tr>
     {{ for row in purchase_rows }}
     <tr>
         <td>{{ row.period }}</td>
@@ -44,13 +44,13 @@
         <h4>Three things to notice</h4>
         <ol>
             <li>
-                <strong>Substitution:</strong> Reese's rose from 5¢ in the base period to 10¢ in Period 1.
-                Average Reese's purchases changed from <strong>{{ reeses_base|to2 }}</strong> to <strong>{{ reeses_p1|to2 }}</strong>.
-                Lifesavers became more expensive between Periods 1 and 2, with average purchases changing from
+                <strong>Substitution:</strong> Tootsie Rolls rose from 5¢ in the base period to 10¢ in Period 1.
+                Average Tootsie Roll purchases changed from <strong>{{ reeses_base|to2 }}</strong> to <strong>{{ reeses_p1|to2 }}</strong>.
+                Life Savers became more expensive between Periods 1 and 2, with average purchases changing from
                 <strong>{{ lifesaver_p1|to2 }}</strong> to <strong>{{ lifesaver_p2|to2 }}</strong>.
             </li>
             <li>
-                <strong>New products:</strong> Snickers did not exist in the base period, so it is absent from the fixed basket.
+                <strong>New products:</strong> Starburst was not available in the base period, so it is absent from the fixed basket.
                 The class nevertheless bought an average of <strong>{{ snickers_p5|to2 }}</strong> in Period 5 and
                 <strong>{{ snickers_p6|to2 }}</strong> in Period 6.
             </li>
