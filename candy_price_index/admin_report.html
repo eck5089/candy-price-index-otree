@@ -50,11 +50,13 @@
 </table>
 {{ endif }}
 
-<h4>Total candy needed for the selected payout</h4>
+<h4>Candy actually needed for the selected payout</h4>
 <table class="table table-sm table-bordered">
     <tr><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
     <tr><td>{{ payout_totals.kiss }}</td><td>{{ payout_totals.reeses }}</td><td>{{ payout_totals.lifesaver }}</td><td>{{ payout_totals.snickers }}</td></tr>
 </table>
+
+<p><strong>Non-food alternatives needed:</strong> {{ alternative_count }}</p>
 
 <h4>Individual payout list</h4>
 <table class="table table-sm table-striped">
