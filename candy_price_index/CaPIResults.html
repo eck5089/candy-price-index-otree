@@ -1,0 +1,31 @@
+{{ block title }}✅ Candy Price Index results{{ endblock }}
+
+{{ block content }}
+<table class="table table-striped align-middle">
+    <thead><tr><th>Period</th><th>Fixed-basket cost</th><th>Your answer</th><th>Correct CaPI</th><th>Status</th></tr></thead>
+    <tbody>
+    {{ for row in rows }}
+        <tr>
+            <td>{{ row.period }}</td>
+            <td>{{ row.basket_cost }}¢</td>
+            <td>{{ row.submitted|to1 }}</td>
+            <td>{{ row.correct|to1 }}</td>
+            <td>{{ if row.is_correct }}✅ Correct{{ else }}❌ Check this one{{ endif }}</td>
+        </tr>
+    {{ endfor }}
+    </tbody>
+</table>
+
+{{ if all_correct }}
+<div class="alert alert-success">🎉 All of your index calculations are within the accepted rounding tolerance.</div>
+{{ else }}
+<div class="alert alert-warning">
+    Remember: the index always prices the <strong>same base-period quantities</strong>. A later-period shopping bundle does not replace the fixed basket.
+</div>
+{{ endif }}
+
+<div class="alert alert-info">
+    <strong>Index level versus inflation:</strong> these CaPI values describe the price level relative to the base period. Next, you will calculate how quickly that index changes.
+</div>
+{{ next_button }}
+{{ endblock }}

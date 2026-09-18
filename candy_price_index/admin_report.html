@@ -1,0 +1,65 @@
+<h3>🍬 Candy Price Index instructor report</h3>
+<p><strong>Participants:</strong> {{ num_participants }}</p>
+
+<h4>Average quantities by period</h4>
+<table class="table table-sm table-bordered">
+    <tr><th>Period</th><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
+    {{ for row in purchase_rows }}
+    <tr>
+        <td>{{ row.period }}</td><td>{{ row.kiss|to2 }}</td><td>{{ row.reeses|to2 }}</td><td>{{ row.lifesaver|to2 }}</td>
+        <td>{{ if row.snickers == None }}—{{ else }}{{ row.snickers|to2 }}{{ endif }}</td>
+    </tr>
+    {{ endfor }}
+</table>
+
+<h4>Base-period bundle distribution</h4>
+<table class="table table-sm table-bordered">
+    <tr><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Students</th></tr>
+    {{ for row in bundle_rows }}
+    <tr><td>{{ row.kiss }}</td><td>{{ row.reeses }}</td><td>{{ row.lifesaver }}</td><td>{{ row.count }}</td></tr>
+    {{ endfor }}
+</table>
+
+<p><strong>Representative basket:</strong> {{ representative_basket }}</p>
+<p><strong>Paying period:</strong> {{ payoff_period }}</p>
+
+{{ if basket_ready }}
+<h4>Calculation performance</h4>
+<h5>CaPI</h5>
+<table class="table table-sm table-striped">
+    <tr><th>Period</th><th>Correct value</th><th>Average student answer</th><th>% correct</th></tr>
+    {{ for row in capi_rows }}
+    <tr>
+        <td>{{ row.period }}</td><td>{{ row.correct|to1 }}</td>
+        <td>{{ if row.average_answer == None }}—{{ else }}{{ row.average_answer|to1 }}{{ endif }}</td>
+        <td>{{ if row.percent_correct == None }}—{{ else }}{{ row.percent_correct|to1 }}%{{ endif }}</td>
+    </tr>
+    {{ endfor }}
+</table>
+
+<h5>Inflation</h5>
+<table class="table table-sm table-striped">
+    <tr><th>Transition</th><th>Correct rate</th><th>Average student answer</th><th>% correct</th></tr>
+    {{ for row in inflation_rows }}
+    <tr>
+        <td>{{ row.transition }}</td><td>{{ row.correct|to1 }}%</td>
+        <td>{{ if row.average_answer == None }}—{{ else }}{{ row.average_answer|to1 }}%{{ endif }}</td>
+        <td>{{ if row.percent_correct == None }}—{{ else }}{{ row.percent_correct|to1 }}%{{ endif }}</td>
+    </tr>
+    {{ endfor }}
+</table>
+{{ endif }}
+
+<h4>Total candy needed for the selected payout</h4>
+<table class="table table-sm table-bordered">
+    <tr><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
+    <tr><td>{{ payout_totals.kiss }}</td><td>{{ payout_totals.reeses }}</td><td>{{ payout_totals.lifesaver }}</td><td>{{ payout_totals.snickers }}</td></tr>
+</table>
+
+<h4>Individual payout list</h4>
+<table class="table table-sm table-striped">
+    <tr><th>Participant</th><th>Alternative?</th><th>Kisses</th><th>Reese's</th><th>Lifesavers</th><th>Snickers</th></tr>
+    {{ for row in payout_rows }}
+    <tr><td>{{ row.participant }}</td><td>{{ row.alternative }}</td><td>{{ row.kiss }}</td><td>{{ row.reeses }}</td><td>{{ row.lifesaver }}</td><td>{{ row.snickers }}</td></tr>
+    {{ endfor }}
+</table>

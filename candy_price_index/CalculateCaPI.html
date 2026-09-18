@@ -1,0 +1,45 @@
+{{ block title }}🧮 Calculate the Candy Price Index{{ endblock }}
+
+{{ block content }}
+<div class="card mb-3">
+    <div class="card-body">
+        <h4>Formula</h4>
+        <p class="fs-5 text-center">
+            <strong>CaPI<sub>t</sub> = 100 × (cost of fixed basket at period-t prices) ÷ (cost at base prices)</strong>
+        </p>
+        <p>
+            The base-period basket costs <strong>{{ base_cost }}¢</strong>. Use the fixed quantities below in every period.
+            Round to one decimal place when necessary.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-5">
+        <h5>🧺 Fixed quantities</h5>
+        <table class="table table-sm table-bordered">
+            <tr><th>Candy</th><th>Quantity</th></tr>
+            {{ for row in basket_rows }}
+            <tr><td>{{ row.name }}</td><td>{{ row.quantity }}</td></tr>
+            {{ endfor }}
+        </table>
+    </div>
+    <div class="col-md-7">
+        <h5>💲 Prices and your CaPI answers</h5>
+        <table class="table table-sm table-striped align-middle">
+            <tr><th>Period</th><th>Kiss</th><th>Reese's</th><th>Lifesaver</th><th>Your CaPI</th></tr>
+            {{ for row in price_rows }}
+            <tr>
+                <td>{{ row.period }}</td><td>{{ row.kiss }}¢</td><td>{{ row.reeses }}¢</td><td>{{ row.lifesaver }}¢</td>
+                <td>{{ formfield row.field_name }}</td>
+            </tr>
+            {{ endfor }}
+        </table>
+    </div>
+</div>
+
+<div class="alert alert-secondary">
+    💡 The Snickers price does not enter this fixed-basket calculation because Snickers did not exist in the base period.
+</div>
+{{ next_button }}
+{{ endblock }}

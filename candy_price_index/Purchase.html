@@ -1,0 +1,52 @@
+{{ block title }}🛒 {{ period_name }} — Purchase decision {{ progress }}{{ endblock }}
+
+{{ block content }}
+<style>
+    .budget-banner { font-size: 1.2rem; border-left: 7px solid #198754; }
+    .candy-card { border: 1px solid #ddd; border-radius: 0.5rem; padding: 1rem; height: 100%; }
+    .candy-price { font-size: 1.15rem; }
+    .budget-number { font-size: 1.25rem; font-weight: 700; }
+    .new-product { font-size: 1.25rem; }
+</style>
+
+<div class="alert alert-light budget-banner">
+    You have <strong>{{ C.BUDGET_CENTS }}¢</strong> to spend in this period.
+    Your choices must total exactly <strong>{{ C.BUDGET_CENTS }}¢</strong>.
+</div>
+
+{{ if new_product }}
+<div class="alert alert-warning new-product">
+    🆕 <strong>A new product is now available:</strong> Miniature Snickers bars have entered the market.
+</div>
+{{ endif }}
+
+<div class="row g-3 mb-3">
+    {{ for row in candy_rows }}
+    <div class="col-md-6">
+        <div class="candy-card candy-row" data-price="{{ row.price }}">
+            <h5>🍬 {{ row.name }}</h5>
+            <p class="candy-price"><strong>{{ row.price }}¢ each</strong></p>
+            <p class="text-muted mb-1">Quantity:</p>
+            {{ formfield row.field_name }}
+        </div>
+    </div>
+    {{ endfor }}
+</div>
+
+<div id="purchase-page" class="card mb-3" data-budget="{{ C.BUDGET_CENTS }}">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <span>Total spent:</span>
+            <span class="budget-number"><span id="total-spent">0</span>¢</span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <span>Amount remaining:</span>
+            <span class="budget-number"><span id="amount-remaining">{{ C.BUDGET_CENTS }}</span>¢</span>
+        </div>
+        <div id="budget-status" class="mt-2 text-muted">Adjust quantities until the remaining amount is 0¢.</div>
+    </div>
+</div>
+
+<script src="{{ static 'candy_price_index/purchase.js' }}"></script>
+{{ next_button }}
+{{ endblock }}

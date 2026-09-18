@@ -1,0 +1,31 @@
+{{ block title }}📈 Calculate inflation or deflation{{ endblock }}
+
+{{ block content }}
+<div class="card mb-3">
+    <div class="card-body">
+        <h4>Formula</h4>
+        <p class="fs-5 text-center">
+            <strong>Inflation rate = 100 × (new CaPI − previous CaPI) ÷ previous CaPI</strong>
+        </p>
+        <p>
+            Enter percentage rates. Negative answers are allowed and represent <strong>deflation</strong>.
+            Use the correct index values shown in the table.
+        </p>
+    </div>
+</div>
+
+<table class="table table-striped align-middle">
+    <thead><tr><th>Transition</th><th>Old CaPI</th><th>New CaPI</th><th>Your rate (%)</th></tr></thead>
+    <tbody>
+    {{ for row in rows }}
+        <tr>
+            <td>{{ row.transition }}</td>
+            <td>{{ row.old_capi|to1 }}</td>
+            <td>{{ row.new_capi|to1 }}</td>
+            <td>{{ formfield row.field_name }}</td>
+        </tr>
+    {{ endfor }}
+    </tbody>
+</table>
+{{ next_button }}
+{{ endblock }}

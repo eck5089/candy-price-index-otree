@@ -1,0 +1,26 @@
+{{ block title }}📊 Inflation results{{ endblock }}
+
+{{ block content }}
+<table class="table table-striped align-middle">
+    <thead><tr><th>Transition</th><th>Your answer</th><th>Correct rate</th><th>Status</th></tr></thead>
+    <tbody>
+    {{ for row in rows }}
+        <tr>
+            <td>{{ row.transition }}</td>
+            <td>{{ row.submitted|to1 }}%</td>
+            <td>{{ row.correct|to1 }}%</td>
+            <td>{{ if row.is_correct }}✅ Correct{{ else }}❌ Check this one{{ endif }}</td>
+        </tr>
+    {{ endfor }}
+    </tbody>
+</table>
+
+{{ if all_correct }}
+<div class="alert alert-success">🎉 All of your inflation calculations are within the accepted rounding tolerance.</div>
+{{ else }}
+<div class="alert alert-warning">
+    The CaPI is an <strong>index level</strong>; inflation is the <strong>percentage change</strong> in that index from one period to the next.
+</div>
+{{ endif }}
+{{ next_button }}
+{{ endblock }}

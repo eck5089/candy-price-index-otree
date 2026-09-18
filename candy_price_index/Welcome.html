@@ -1,0 +1,53 @@
+{{ block title }}🍬 Candy Price Index Experiment{{ endblock }}
+
+{{ block content }}
+<style>
+    .hero-card { border-left: 7px solid #6f42c1; }
+    .rule-card { border-left: 7px solid #0d6efd; }
+    .allergy-card { border-left: 7px solid #dc3545; }
+    .big-rule { font-size: 1.2rem; }
+</style>
+
+<div class="card mb-3 hero-card">
+    <div class="card-body">
+        <h3>Welcome!</h3>
+        <p>
+            In this activity, you will shop for candy under seven different price schedules.
+            Afterward, the class will use its choices to build a fixed market basket and calculate
+            a <strong>Candy Price Index (CaPI)</strong> and inflation rates.
+        </p>
+    </div>
+</div>
+
+<div class="card mb-3 rule-card">
+    <div class="card-body">
+        <h4>🛒 How the purchasing stage works</h4>
+        <ol>
+            <li>You receive a fresh <strong>30¢ purchasing budget in every period</strong>.</li>
+            <li>You must spend <strong>exactly 30¢</strong> in each period.</li>
+            <li>Prices change, so choose the bundle you genuinely prefer at each set of prices.</li>
+            <li>Your budget resets each period; one choice does not reduce another period's budget.</li>
+            <li>At the end, a computer draw selects <strong>one common paying period</strong> for the class.</li>
+        </ol>
+        <div class="alert alert-info big-rule mb-0">
+            🎲 Only the bundle you selected in the randomly chosen paying period will actually be distributed.
+            Treat every decision as though it could be the one that counts.
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3 allergy-card">
+    <div class="card-body">
+        <h4>⚠️ Food and allergen notice</h4>
+        <p>
+            This activity may involve chocolate, peanuts, and other food allergens. You can participate fully
+            without receiving food. Select a non-food alternative below when appropriate, and speak with the instructor.
+        </p>
+    </div>
+</div>
+
+<h4>Quick comprehension check</h4>
+<p>Please answer correctly before beginning. You can revise an incorrect response.</p>
+{{ formfields }}
+{{ next_button }}
+{{ endblock }}

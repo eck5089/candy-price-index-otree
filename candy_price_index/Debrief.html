@@ -1,0 +1,70 @@
+{{ block title }}🔍 What did the Candy Price Index reveal?{{ endblock }}
+
+{{ block content }}
+<div class="card mb-3">
+    <div class="card-body">
+        <h3>Class results at a glance</h3>
+        <p>The common paying period was <strong>{{ payoff_period }}</strong>. The tables below use the class's representative fixed basket.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <h4>CaPI level</h4>
+        <table class="table table-sm table-striped">
+            <tr><th>Period</th><th>CaPI</th></tr>
+            {{ for row in capi_rows }}<tr><td>{{ row.period }}</td><td>{{ row.capi|to1 }}</td></tr>{{ endfor }}
+        </table>
+    </div>
+    <div class="col-md-7">
+        <h4>Inflation / deflation</h4>
+        <table class="table table-sm table-striped">
+            <tr><th>Transition</th><th>Rate</th></tr>
+            {{ for row in inflation_rows }}<tr><td>{{ row.transition }}</td><td>{{ row.inflation|to1 }}%</td></tr>{{ endfor }}
+        </table>
+    </div>
+</div>
+
+<h4>🛒 How class purchases changed</h4>
+<table class="table table-sm table-bordered align-middle">
+    <tr><th>Period</th><th>Avg. Kisses</th><th>Avg. Reese's</th><th>Avg. Lifesavers</th><th>Avg. Snickers</th></tr>
+    {{ for row in purchase_rows }}
+    <tr>
+        <td>{{ row.period }}</td>
+        <td>{{ row.kiss|to2 }}</td>
+        <td>{{ row.reeses|to2 }}</td>
+        <td>{{ row.lifesaver|to2 }}</td>
+        <td>{{ if row.snickers == None }}—{{ else }}{{ row.snickers|to2 }}{{ endif }}</td>
+    </tr>
+    {{ endfor }}
+</table>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h4>Three things to notice</h4>
+        <ol>
+            <li>
+                <strong>Substitution:</strong> Reese's rose from 5¢ in the base period to 10¢ in Period 1.
+                Average Reese's purchases changed from <strong>{{ reeses_base|to2 }}</strong> to <strong>{{ reeses_p1|to2 }}</strong>.
+                Lifesavers became more expensive between Periods 1 and 2, with average purchases changing from
+                <strong>{{ lifesaver_p1|to2 }}</strong> to <strong>{{ lifesaver_p2|to2 }}</strong>.
+            </li>
+            <li>
+                <strong>New products:</strong> Snickers did not exist in the base period, so it is absent from the fixed basket.
+                The class nevertheless bought an average of <strong>{{ snickers_p5|to2 }}</strong> in Period 5 and
+                <strong>{{ snickers_p6|to2 }}</strong> in Period 6.
+            </li>
+            <li>
+                <strong>Quality:</strong> our calculation assumes a candy is unchanged over time. If its size or quality improves,
+                part of a higher price may pay for a better product rather than represent pure inflation.
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="alert alert-info">
+    💬 Discuss: Did the fixed basket accurately capture the cost of maintaining <em>your</em> preferred candy bundle?
+    Who experienced a different cost of living from the “typical” consumer, and why?
+</div>
+{{ next_button }}
+{{ endblock }}
