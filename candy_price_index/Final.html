@@ -1,0 +1,36 @@
+{{ block title }}🍬 Your final payout receipt{{ endblock }}
+
+{{ block content }}
+<div class="alert alert-primary fs-5">
+    <strong>Participant #{{ participant_number }}</strong><br>
+    Paying period: <strong>{{ period_name }}</strong>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h4>Your payout bundle</h4>
+        <table class="table table-striped mb-0">
+            {{ for row in payout_rows }}
+            <tr>
+                <td>{{ row.name }}</td>
+                <td><strong>{{ row.quantity }}</strong></td>
+            </tr>
+            {{ endfor }}
+        </table>
+    </div>
+</div>
+
+{{ if player.needs_alternative }}
+<div class="alert alert-warning">
+    You selected a non-food alternative. Keep this page open and show <strong>Participant #{{ participant_number }}</strong> to the instructor when rewards are distributed.
+</div>
+{{ else }}
+<div class="alert alert-success">
+    <strong>Keep this page open.</strong> Show <strong>Participant #{{ participant_number }}</strong> and this payout bundle to the instructor when candy is distributed.
+</div>
+{{ endif }}
+
+<p class="text-muted mb-0">
+    You have finished the activity. There are no more decisions or pages to complete.
+</p>
+{{ endblock }}
