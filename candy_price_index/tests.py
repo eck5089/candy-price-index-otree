@@ -34,3 +34,4 @@ class PlayerBot(Bot):
         yield InflationResults
         yield Payout
         yield Debrief
+        yield Final
