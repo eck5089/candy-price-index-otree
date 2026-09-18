@@ -696,12 +696,16 @@ def vars_for_admin_report(subsession):
 
     payout_rows = []
     payout_totals = dict(kiss=0, reeses=0, lifesaver=0, snickers=0)
+    alternative_count = 0
     if group.payoff_period is not None:
         for p in players:
-            payout_totals['kiss'] += p.payout_kiss
-            payout_totals['reeses'] += p.payout_reeses
-            payout_totals['lifesaver'] += p.payout_lifesaver
-            payout_totals['snickers'] += p.payout_snickers
+            if p.needs_alternative:
+                alternative_count += 1
+            else:
+                payout_totals['kiss'] += p.payout_kiss
+                payout_totals['reeses'] += p.payout_reeses
+                payout_totals['lifesaver'] += p.payout_lifesaver
+                payout_totals['snickers'] += p.payout_snickers
             payout_rows.append(dict(
                 participant_number=p.id_in_group,
                 participant=p.participant.label or p.participant.code,
@@ -726,6 +730,7 @@ def vars_for_admin_report(subsession):
         inflation_rows=inflation_rows,
         payoff_period=(C.PERIOD_NAMES[group.payoff_period] if group.payoff_period is not None else 'Not yet selected'),
         payout_totals=payout_totals,
+        alternative_count=alternative_count,
         payout_rows=payout_rows,
     )
 
