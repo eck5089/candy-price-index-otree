@@ -560,23 +560,26 @@ class ReadyForPayoutWait(WaitPage):
     is_displayed = staticmethod(lambda player: C.PACE_MAJOR_STAGES)
 
 
+def payout_vars(player):
+    period = player.selected_payoff_period
+    return dict(
+        participant_number=player.id_in_group,
+        period_name=C.PERIOD_NAMES[period],
+        price_rows=[
+            dict(name=get_display_name(code), price=get_price(period, code))
+            for code in get_candies_for_period(period)
+        ],
+        payout_rows=[
+            dict(name=C.CANDY_KISS, quantity=player.payout_kiss),
+            dict(name=C.CANDY_REESES, quantity=player.payout_reeses),
+            dict(name=C.CANDY_LIFESAVER, quantity=player.payout_lifesaver),
+            dict(name=C.CANDY_SNICKERS, quantity=player.payout_snickers),
+        ],
+    )
+
+
 class Payout(Page):
-    @staticmethod
-    def vars_for_template(player):
-        period = player.selected_payoff_period
-        return dict(
-            period_name=C.PERIOD_NAMES[period],
-            price_rows=[
-                dict(name=get_display_name(code), price=get_price(period, code))
-                for code in get_candies_for_period(period)
-            ],
-            payout_rows=[
-                dict(name=C.CANDY_KISS, quantity=player.payout_kiss),
-                dict(name=C.CANDY_REESES, quantity=player.payout_reeses),
-                dict(name=C.CANDY_LIFESAVER, quantity=player.payout_lifesaver),
-                dict(name=C.CANDY_SNICKERS, quantity=player.payout_snickers),
-            ],
-        )
+    vars_for_template = staticmethod(payout_vars)
 
 
 class Debrief(Page):
@@ -614,6 +617,10 @@ class Debrief(Page):
         player.participant.finished = True
 
 
+class Final(Page):
+    vars_for_template = staticmethod(payout_vars)
+
+
 page_sequence = [
     Welcome,
     PurchaseBase, WaitAfterBase,
@@ -634,6 +641,7 @@ page_sequence = [
     ReadyForPayoutWait,
     Payout,
     Debrief,
+    Final,
 ]
 
 
@@ -695,6 +703,7 @@ def vars_for_admin_report(subsession):
             payout_totals['lifesaver'] += p.payout_lifesaver
             payout_totals['snickers'] += p.payout_snickers
             payout_rows.append(dict(
+                participant_number=p.id_in_group,
                 participant=p.participant.label or p.participant.code,
                 alternative=p.needs_alternative,
                 kiss=p.payout_kiss,
