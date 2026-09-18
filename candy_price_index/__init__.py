@@ -13,10 +13,13 @@ class C(BaseConstants):
 
     BUDGET_CENTS = 30
 
-    CANDY_KISS = "Hershey's Kiss"
-    CANDY_REESES = "Miniature Reese's Peanut Butter Cup"
-    CANDY_LIFESAVER = 'Lifesaver'
-    CANDY_SNICKERS = 'Miniature Snickers bar'
+    # Internal field names retain the original k/r/l/s codes so existing
+    # sessions and database fields remain compatible. These display names are
+    # the candies currently used in class.
+    CANDY_KISS = 'Smarties roll'
+    CANDY_REESES = 'Classic Tootsie Roll'
+    CANDY_LIFESAVER = 'Fruit Life Saver'
+    CANDY_SNICKERS = 'Starburst'
 
     # Base, then Periods 1–6.
     KISS_PRICES = (5, 5, 5, 10, 10, 5, 10)
@@ -722,8 +725,8 @@ def vars_for_admin_report(subsession):
         bundle_rows=bundle_rows,
         purchase_rows=purchase_rows,
         representative_basket=(
-            f'{group.representative_kiss} Kisses, {group.representative_reeses} Reese\'s, '
-            f'{group.representative_lifesaver} Lifesavers'
+            f'{group.representative_kiss} Smarties rolls, {group.representative_reeses} Tootsie Rolls, '
+            f'{group.representative_lifesaver} Fruit Life Savers'
             if basket_ready else 'Not yet calculated'
         ),
         capi_rows=capi_rows,
@@ -740,10 +743,10 @@ def custom_export(players):
         'session_code', 'participant_code', 'participant_label', 'needs_alternative',
     ]
     for idx in range(C.NUM_PERIODS):
-        header += [f'kisses_p{idx}', f'reeses_p{idx}', f'lifesavers_p{idx}', f'snickers_p{idx}', f'total_cost_p{idx}']
+        header += [f'smarties_p{idx}', f'tootsie_rolls_p{idx}', f'life_savers_p{idx}', f'starbursts_p{idx}', f'total_cost_p{idx}']
     header += [
         'representative_kiss', 'representative_reeses', 'representative_lifesaver',
-        'selected_payoff_period', 'payout_kiss', 'payout_reeses', 'payout_lifesaver', 'payout_snickers',
+        'selected_payoff_period', 'payout_smarties', 'payout_tootsie_rolls', 'payout_life_savers', 'payout_starbursts',
     ]
     for idx in range(C.NUM_PERIODS):
         header += [f'capi_submitted_{idx}', f'capi_correct_value_{idx}', f'capi_answer_correct_{idx}']
